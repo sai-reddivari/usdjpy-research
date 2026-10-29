@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you cite this study, please use the metadata below."
+type: report
+title: "Economic features and selection risk in daily USD/JPY forecasting"
+authors:
+  - family-names: Reddivari
+    given-names: Sai
+version: 1.0.0
+date-released: 2026-10-29
+repository-code: "https://github.com/sai-reddivari/usdjpy-research"

@@ -1,0 +1,273 @@
+{
+  "versions": {
+    "python": "3.14.8",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "xgboost": "3.4.1",
+    "catboost": "1.2.10",
+    "shap": "0.54.1",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1"
+  },
+  "shortlist": [
+    "ret_5d",
+    "abs_ret_1d",
+    "vol_20",
+    "dist_ma60",
+    "tokyo_reference_to_ny_close",
+    "weekend_in_window",
+    "gap2y",
+    "gap2y_chg_1d",
+    "gap2y_chg_5d",
+    "jp_slope_chg_5d",
+    "banks_rel_5d",
+    "banks_rel_20d",
+    "elec_rel_5d",
+    "topix_5d",
+    "vix",
+    "vix_chg_1d",
+    "vix_chg_5d",
+    "spy_1d",
+    "spy_5d",
+    "qqq_minus_spy_5d",
+    "qqq_minus_spy_20d",
+    "smh_minus_qqq_5d",
+    "usd_basket_5d",
+    "yen_relative_5d",
+    "wti_5d_lagged",
+    "gld_5d",
+    "cftc_net",
+    "cftc_net_chg_4reports",
+    "cftc_release_age_days",
+    "pos_z",
+    "vol_z",
+    "short_yen_stress",
+    "event_in_window",
+    "gapchg_x_vixchg"
+  ],
+  "models": {
+    "nw_lightgbm": {
+      "booster": "lightgbm",
+      "n_features": 34,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.3328487300435547,
+        "inner_balanced_accuracy": 0.625,
+        "n_candidates": 178
+      },
+      "chosen": {
+        "config_index": 13,
+        "config": {
+          "num_leaves": 15,
+          "min_child_samples": 20,
+          "learning_rate": 0.1,
+          "min_split_gain": 0.1
+        },
+        "inner_auc": [
+          0.56818,
+          0.62229,
+          0.72475
+        ],
+        "inner_auc_full_precision": [
+          0.5681818181818182,
+          0.6222943722943722,
+          0.72475106685633
+        ],
+        "mean_inner_auc": 0.6384090857775068,
+        "best_iteration": [
+          24,
+          123,
+          5
+        ],
+        "knob_at_default": false
+      },
+      "refit_iterations": 5
+    },
+    "nw_xgboost": {
+      "booster": "xgboost",
+      "n_features": 34,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.33470186591148376,
+        "inner_balanced_accuracy": 0.6203333333333334,
+        "n_candidates": 149
+      },
+      "chosen": {
+        "config_index": 9,
+        "config": {
+          "max_depth": 3,
+          "min_child_weight": 1,
+          "learning_rate": 0.1,
+          "gamma": 1.0
+        },
+        "inner_auc": [
+          0.66875,
+          0.56818,
+          0.60028
+        ],
+        "inner_auc_full_precision": [
+          0.66875,
+          0.5681818181818181,
+          0.6002844950213371
+        ],
+        "mean_inner_auc": 0.612405437734385,
+        "best_iteration": [
+          15,
+          6,
+          128
+        ],
+        "knob_at_default": false
+      },
+      "refit_iterations": 128
+    },
+    "nw_catboost": {
+      "booster": "catboost",
+      "n_features": 34,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.34184247875202556,
+        "inner_balanced_accuracy": 0.6499999999999999,
+        "n_candidates": 184
+      },
+      "chosen": {
+        "config_index": 11,
+        "config": {
+          "depth": 4,
+          "l2_leaf_reg": 10,
+          "learning_rate": 0.1,
+          "random_strength": 3
+        },
+        "inner_auc": [
+          0.59773,
+          0.64394,
+          0.71693
+        ],
+        "inner_auc_full_precision": [
+          0.5977272727272728,
+          0.643939393939394,
+          0.716927453769559
+        ],
+        "mean_inner_auc": 0.6528647068120752,
+        "best_iteration": [
+          63,
+          19,
+          18
+        ],
+        "knob_at_default": false
+      },
+      "refit_iterations": 18
+    },
+    "lightgbm_own_market": {
+      "booster": "lightgbm",
+      "n_features": 10,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.3188946854140068,
+        "inner_balanced_accuracy": 0.635,
+        "n_candidates": 112
+      },
+      "chosen": {
+        "config_index": 6,
+        "config": {
+          "num_leaves": 15,
+          "min_child_samples": 40,
+          "learning_rate": 0.03,
+          "min_split_gain": 0.0
+        },
+        "inner_auc": [
+          0.60057,
+          0.56548,
+          0.74253
+        ],
+        "inner_auc_full_precision": [
+          0.600568181818182,
+          0.5654761904761905,
+          0.7425320056899004
+        ],
+        "mean_inner_auc": 0.6361921259947576,
+        "best_iteration": [
+          4,
+          2,
+          7
+        ],
+        "knob_at_default": true
+      },
+      "refit_iterations": 7
+    },
+    "xgboost_own_market": {
+      "booster": "xgboost",
+      "n_features": 10,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.31787870824337006,
+        "inner_balanced_accuracy": 0.6266666666666667,
+        "n_candidates": 127
+      },
+      "chosen": {
+        "config_index": 11,
+        "config": {
+          "max_depth": 3,
+          "min_child_weight": 5,
+          "learning_rate": 0.1,
+          "gamma": 1.0
+        },
+        "inner_auc": [
+          0.60795,
+          0.59903,
+          0.65576
+        ],
+        "inner_auc_full_precision": [
+          0.6079545454545454,
+          0.599025974025974,
+          0.6557610241820768
+        ],
+        "mean_inner_auc": 0.6209138478875321,
+        "best_iteration": [
+          27,
+          3,
+          15
+        ],
+        "knob_at_default": false
+      },
+      "refit_iterations": 15
+    },
+    "catboost_own_market": {
+      "booster": "catboost",
+      "n_features": 10,
+      "n_train": 1009,
+      "threshold_choice": {
+        "threshold": 0.47211183295205533,
+        "inner_balanced_accuracy": 0.5613333333333334,
+        "n_candidates": 160
+      },
+      "chosen": {
+        "config_index": 0,
+        "config": {
+          "depth": 4,
+          "l2_leaf_reg": 3,
+          "learning_rate": 0.03,
+          "random_strength": 1
+        },
+        "inner_auc": [
+          0.58182,
+          0.52814,
+          0.67994
+        ],
+        "inner_auc_full_precision": [
+          0.5818181818181818,
+          0.5281385281385281,
+          0.6799431009957325
+        ],
+        "mean_inner_auc": 0.5966332703174807,
+        "best_iteration": [
+          75,
+          33,
+          5
+        ],
+        "knob_at_default": true
+      },
+      "refit_iterations": 5
+    }
+  }
+}

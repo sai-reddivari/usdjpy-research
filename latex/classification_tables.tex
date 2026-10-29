@@ -1,0 +1,194 @@
+
+\subsubsection*{Run A development}
+517 outer-development predictions; 157 positives and 360 negatives. The pooled classifications apply each fold's own inner-chosen threshold, rather than fitting one threshold to the pooled outer predictions.
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.35\linewidth}rrrrrr@{}}
+\toprule Model & TN & FP & FN & TP & BA & Accuracy\\\midrule\endhead
+Logistic: own price & 149 & 211 & 55 & 102 & 0.532 & 0.485\\
+LightGBM: selected & 183 & 177 & 74 & 83 & 0.518 & 0.515\\
+XGBoost: selected & 181 & 179 & 76 & 81 & 0.509 & 0.507\\
+CatBoost: selected & 181 & 179 & 76 & 81 & 0.509 & 0.507\\
+LightGBM: own price (unmatched) & 158 & 202 & 61 & 96 & 0.525 & 0.491\\
+Constant prevalence & 180 & 180 & 79 & 78 & 0.498 & 0.499\\
+\bottomrule\end{longtable}\endgroup
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.34\linewidth}p{.15\linewidth}rrrr@{}}
+\toprule Model & Class/average & Precision & Recall & F1 & Support\\\midrule\endhead
+Logistic: own price & 0 & 0.730 & 0.414 & 0.528 & 360\\
+Logistic: own price & 1 & 0.326 & 0.650 & 0.434 & 157\\
+Logistic: own price & Macro & 0.528 & 0.532 & 0.481 & 517\\
+Logistic: own price & Weighted & 0.608 & 0.485 & 0.500 & 517\\
+LightGBM: selected & 0 & 0.712 & 0.508 & 0.593 & 360\\
+LightGBM: selected & 1 & 0.319 & 0.529 & 0.398 & 157\\
+LightGBM: selected & Macro & 0.516 & 0.518 & 0.496 & 517\\
+LightGBM: selected & Weighted & 0.593 & 0.515 & 0.534 & 517\\
+XGBoost: selected & 0 & 0.704 & 0.503 & 0.587 & 360\\
+XGBoost: selected & 1 & 0.312 & 0.516 & 0.388 & 157\\
+XGBoost: selected & Macro & 0.508 & 0.509 & 0.488 & 517\\
+XGBoost: selected & Weighted & 0.585 & 0.507 & 0.527 & 517\\
+CatBoost: selected & 0 & 0.704 & 0.503 & 0.587 & 360\\
+CatBoost: selected & 1 & 0.312 & 0.516 & 0.388 & 157\\
+CatBoost: selected & Macro & 0.508 & 0.509 & 0.488 & 517\\
+CatBoost: selected & Weighted & 0.585 & 0.507 & 0.527 & 517\\
+LightGBM: own price (unmatched) & 0 & 0.721 & 0.439 & 0.546 & 360\\
+LightGBM: own price (unmatched) & 1 & 0.322 & 0.611 & 0.422 & 157\\
+LightGBM: own price (unmatched) & Macro & 0.522 & 0.525 & 0.484 & 517\\
+LightGBM: own price (unmatched) & Weighted & 0.600 & 0.491 & 0.508 & 517\\
+Constant prevalence & 0 & 0.695 & 0.500 & 0.582 & 360\\
+Constant prevalence & 1 & 0.302 & 0.497 & 0.376 & 157\\
+Constant prevalence & Macro & 0.499 & 0.498 & 0.479 & 517\\
+Constant prevalence & Weighted & 0.576 & 0.499 & 0.519 & 517\\
+\bottomrule\end{longtable}\endgroup
+
+\subsubsection*{Run B development}
+517 outer-development predictions; 157 positives and 360 negatives. The pooled classifications apply each fold's own inner-chosen threshold, rather than fitting one threshold to the pooled outer predictions.
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.35\linewidth}rrrrrr@{}}
+\toprule Model & TN & FP & FN & TP & BA & Accuracy\\\midrule\endhead
+Logistic: own price & 149 & 211 & 55 & 102 & 0.532 & 0.485\\
+LightGBM: selected & 195 & 165 & 90 & 67 & 0.484 & 0.507\\
+XGBoost: selected & 173 & 187 & 76 & 81 & 0.498 & 0.491\\
+CatBoost: selected & 106 & 254 & 52 & 105 & 0.482 & 0.408\\
+LightGBM: own price & 190 & 170 & 76 & 81 & 0.522 & 0.524\\
+XGBoost: own price & 247 & 113 & 114 & 43 & 0.480 & 0.561\\
+CatBoost: own price & 176 & 184 & 73 & 84 & 0.512 & 0.503\\
+Constant prevalence & 180 & 180 & 79 & 78 & 0.498 & 0.499\\
+\bottomrule\end{longtable}\endgroup
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.34\linewidth}p{.15\linewidth}rrrr@{}}
+\toprule Model & Class/average & Precision & Recall & F1 & Support\\\midrule\endhead
+Logistic: own price & 0 & 0.730 & 0.414 & 0.528 & 360\\
+Logistic: own price & 1 & 0.326 & 0.650 & 0.434 & 157\\
+Logistic: own price & Macro & 0.528 & 0.532 & 0.481 & 517\\
+Logistic: own price & Weighted & 0.608 & 0.485 & 0.500 & 517\\
+LightGBM: selected & 0 & 0.684 & 0.542 & 0.605 & 360\\
+LightGBM: selected & 1 & 0.289 & 0.427 & 0.344 & 157\\
+LightGBM: selected & Macro & 0.487 & 0.484 & 0.475 & 517\\
+LightGBM: selected & Weighted & 0.564 & 0.507 & 0.526 & 517\\
+XGBoost: selected & 0 & 0.695 & 0.481 & 0.568 & 360\\
+XGBoost: selected & 1 & 0.302 & 0.516 & 0.381 & 157\\
+XGBoost: selected & Macro & 0.499 & 0.498 & 0.475 & 517\\
+XGBoost: selected & Weighted & 0.576 & 0.491 & 0.511 & 517\\
+CatBoost: selected & 0 & 0.671 & 0.294 & 0.409 & 360\\
+CatBoost: selected & 1 & 0.292 & 0.669 & 0.407 & 157\\
+CatBoost: selected & Macro & 0.482 & 0.482 & 0.408 & 517\\
+CatBoost: selected & Weighted & 0.556 & 0.408 & 0.409 & 517\\
+LightGBM: own price & 0 & 0.714 & 0.528 & 0.607 & 360\\
+LightGBM: own price & 1 & 0.323 & 0.516 & 0.397 & 157\\
+LightGBM: own price & Macro & 0.518 & 0.522 & 0.502 & 517\\
+LightGBM: own price & Weighted & 0.595 & 0.524 & 0.543 & 517\\
+XGBoost: own price & 0 & 0.684 & 0.686 & 0.685 & 360\\
+XGBoost: own price & 1 & 0.276 & 0.274 & 0.275 & 157\\
+XGBoost: own price & Macro & 0.480 & 0.480 & 0.480 & 517\\
+XGBoost: own price & Weighted & 0.560 & 0.561 & 0.561 & 517\\
+CatBoost: own price & 0 & 0.707 & 0.489 & 0.578 & 360\\
+CatBoost: own price & 1 & 0.313 & 0.535 & 0.395 & 157\\
+CatBoost: own price & Macro & 0.510 & 0.512 & 0.487 & 517\\
+CatBoost: own price & Weighted & 0.587 & 0.503 & 0.523 & 517\\
+Constant prevalence & 0 & 0.695 & 0.500 & 0.582 & 360\\
+Constant prevalence & 1 & 0.302 & 0.497 & 0.376 & 157\\
+Constant prevalence & Macro & 0.499 & 0.498 & 0.479 & 517\\
+Constant prevalence & Weighted & 0.576 & 0.499 & 0.519 & 517\\
+\bottomrule\end{longtable}\endgroup
+
+\subsubsection*{No-wrapper development}
+517 outer-development predictions; 157 positives and 360 negatives. The pooled classifications apply each fold's own inner-chosen threshold, rather than fitting one threshold to the pooled outer predictions.
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.35\linewidth}rrrrrr@{}}
+\toprule Model & TN & FP & FN & TP & BA & Accuracy\\\midrule\endhead
+Logistic: own price & 149 & 211 & 55 & 102 & 0.532 & 0.485\\
+LightGBM: shortlist & 194 & 166 & 86 & 71 & 0.496 & 0.513\\
+XGBoost: shortlist & 203 & 157 & 78 & 79 & 0.534 & 0.545\\
+CatBoost: shortlist & 185 & 175 & 69 & 88 & 0.537 & 0.528\\
+LightGBM: own price & 190 & 170 & 76 & 81 & 0.522 & 0.524\\
+XGBoost: own price & 247 & 113 & 114 & 43 & 0.480 & 0.561\\
+CatBoost: own price & 176 & 184 & 73 & 84 & 0.512 & 0.503\\
+Constant prevalence & 180 & 180 & 79 & 78 & 0.498 & 0.499\\
+\bottomrule\end{longtable}\endgroup
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.34\linewidth}p{.15\linewidth}rrrr@{}}
+\toprule Model & Class/average & Precision & Recall & F1 & Support\\\midrule\endhead
+Logistic: own price & 0 & 0.730 & 0.414 & 0.528 & 360\\
+Logistic: own price & 1 & 0.326 & 0.650 & 0.434 & 157\\
+Logistic: own price & Macro & 0.528 & 0.532 & 0.481 & 517\\
+Logistic: own price & Weighted & 0.608 & 0.485 & 0.500 & 517\\
+LightGBM: shortlist & 0 & 0.693 & 0.539 & 0.606 & 360\\
+LightGBM: shortlist & 1 & 0.300 & 0.452 & 0.360 & 157\\
+LightGBM: shortlist & Macro & 0.496 & 0.496 & 0.483 & 517\\
+LightGBM: shortlist & Weighted & 0.573 & 0.513 & 0.532 & 517\\
+XGBoost: shortlist & 0 & 0.722 & 0.564 & 0.633 & 360\\
+XGBoost: shortlist & 1 & 0.335 & 0.503 & 0.402 & 157\\
+XGBoost: shortlist & Macro & 0.529 & 0.534 & 0.518 & 517\\
+XGBoost: shortlist & Weighted & 0.605 & 0.545 & 0.563 & 517\\
+CatBoost: shortlist & 0 & 0.728 & 0.514 & 0.603 & 360\\
+CatBoost: shortlist & 1 & 0.335 & 0.561 & 0.419 & 157\\
+CatBoost: shortlist & Macro & 0.531 & 0.537 & 0.511 & 517\\
+CatBoost: shortlist & Weighted & 0.609 & 0.528 & 0.547 & 517\\
+LightGBM: own price & 0 & 0.714 & 0.528 & 0.607 & 360\\
+LightGBM: own price & 1 & 0.323 & 0.516 & 0.397 & 157\\
+LightGBM: own price & Macro & 0.518 & 0.522 & 0.502 & 517\\
+LightGBM: own price & Weighted & 0.595 & 0.524 & 0.543 & 517\\
+XGBoost: own price & 0 & 0.684 & 0.686 & 0.685 & 360\\
+XGBoost: own price & 1 & 0.276 & 0.274 & 0.275 & 157\\
+XGBoost: own price & Macro & 0.480 & 0.480 & 0.480 & 517\\
+XGBoost: own price & Weighted & 0.560 & 0.561 & 0.561 & 517\\
+CatBoost: own price & 0 & 0.707 & 0.489 & 0.578 & 360\\
+CatBoost: own price & 1 & 0.313 & 0.535 & 0.395 & 157\\
+CatBoost: own price & Macro & 0.510 & 0.512 & 0.487 & 517\\
+CatBoost: own price & Weighted & 0.587 & 0.503 & 0.523 & 517\\
+Constant prevalence & 0 & 0.695 & 0.500 & 0.582 & 360\\
+Constant prevalence & 1 & 0.302 & 0.497 & 0.376 & 157\\
+Constant prevalence & Macro & 0.499 & 0.498 & 0.479 & 517\\
+Constant prevalence & Weighted & 0.576 & 0.499 & 0.519 & 517\\
+\bottomrule\end{longtable}\endgroup
+
+\subsubsection*{Original eligible reserved sample}
+229 common eligible rows; 64 positives and 165 negatives. Each procedure uses its frozen inner-chosen threshold throughout the reserved year.
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.35\linewidth}rrrrrr@{}}
+\toprule Model & TN & FP & FN & TP & BA & Accuracy\\\midrule\endhead
+Logistic: own price & 54 & 111 & 19 & 45 & 0.515 & 0.432\\
+LightGBM: shortlist & 88 & 77 & 30 & 34 & 0.532 & 0.533\\
+XGBoost: shortlist & 80 & 85 & 23 & 41 & 0.563 & 0.528\\
+CatBoost: shortlist (nominee) & 59 & 106 & 16 & 48 & 0.554 & 0.467\\
+LightGBM: own price & 52 & 113 & 14 & 50 & 0.548 & 0.445\\
+XGBoost: own price & 46 & 119 & 11 & 53 & 0.553 & 0.432\\
+CatBoost: own price & 1 & 164 & 0 & 64 & 0.503 & 0.284\\
+Constant prevalence & 0 & 165 & 0 & 64 & 0.500 & 0.279\\
+\bottomrule\end{longtable}\endgroup
+\begingroup\small\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{.34\linewidth}p{.15\linewidth}rrrr@{}}
+\toprule Model & Class/average & Precision & Recall & F1 & Support\\\midrule\endhead
+Logistic: own price & 0 & 0.740 & 0.327 & 0.454 & 165\\
+Logistic: own price & 1 & 0.288 & 0.703 & 0.409 & 64\\
+Logistic: own price & Macro & 0.514 & 0.515 & 0.431 & 229\\
+Logistic: own price & Weighted & 0.614 & 0.432 & 0.441 & 229\\
+LightGBM: shortlist & 0 & 0.746 & 0.533 & 0.622 & 165\\
+LightGBM: shortlist & 1 & 0.306 & 0.531 & 0.389 & 64\\
+LightGBM: shortlist & Macro & 0.526 & 0.532 & 0.505 & 229\\
+LightGBM: shortlist & Weighted & 0.623 & 0.533 & 0.557 & 229\\
+XGBoost: shortlist & 0 & 0.777 & 0.485 & 0.597 & 165\\
+XGBoost: shortlist & 1 & 0.325 & 0.641 & 0.432 & 64\\
+XGBoost: shortlist & Macro & 0.551 & 0.563 & 0.514 & 229\\
+XGBoost: shortlist & Weighted & 0.651 & 0.528 & 0.551 & 229\\
+CatBoost: shortlist (nominee) & 0 & 0.787 & 0.358 & 0.492 & 165\\
+CatBoost: shortlist (nominee) & 1 & 0.312 & 0.750 & 0.440 & 64\\
+CatBoost: shortlist (nominee) & Macro & 0.549 & 0.554 & 0.466 & 229\\
+CatBoost: shortlist (nominee) & Weighted & 0.654 & 0.467 & 0.477 & 229\\
+LightGBM: own price & 0 & 0.788 & 0.315 & 0.450 & 165\\
+LightGBM: own price & 1 & 0.307 & 0.781 & 0.441 & 64\\
+LightGBM: own price & Macro & 0.547 & 0.548 & 0.445 & 229\\
+LightGBM: own price & Weighted & 0.653 & 0.445 & 0.448 & 229\\
+XGBoost: own price & 0 & 0.807 & 0.279 & 0.414 & 165\\
+XGBoost: own price & 1 & 0.308 & 0.828 & 0.449 & 64\\
+XGBoost: own price & Macro & 0.558 & 0.553 & 0.432 & 229\\
+XGBoost: own price & Weighted & 0.668 & 0.432 & 0.424 & 229\\
+CatBoost: own price & 0 & 1.000 & 0.006 & 0.012 & 165\\
+CatBoost: own price & 1 & 0.281 & 1.000 & 0.438 & 64\\
+CatBoost: own price & Macro & 0.640 & 0.503 & 0.225 & 229\\
+CatBoost: own price & Weighted & 0.799 & 0.284 & 0.131 & 229\\
+Constant prevalence & 0 & 0.000 & 0.000 & 0.000 & 165\\
+Constant prevalence & 1 & 0.279 & 1.000 & 0.437 & 64\\
+Constant prevalence & Macro & 0.140 & 0.500 & 0.218 & 229\\
+Constant prevalence & Weighted & 0.078 & 0.279 & 0.122 & 229\\
+\bottomrule\end{longtable}\endgroup

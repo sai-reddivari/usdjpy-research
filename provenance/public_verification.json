@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "scope": "Public snapshot only; not a research rerun",
+  "evidence_and_code_hashes": 25,
+  "python_syntax_files": 17,
+  "candidate_features": 39,
+  "frozen_features": 34,
+  "numeric_checks": 132,
+  "readme_local_links": 9,
+  "pdf_files_present": 2,
+  "private_data_models_credentials": "Not bundled; this check rejects known artifact types",
+  "date": "2026-10-29",
+  "main_report_pages": 10,
+  "technical_appendix_pages": 17,
+  "rendered_pdf_visual_review": "All original pages inspected; revised feature-table page rendered and checked.",
+  "original_delivery_files_verified_unchanged": 129,
+  "original_submission_zip_sha256": "69ed2b2fca9e9ee9015a122d650c7f4609f41a7164e06a0efc3923e8513320e8",
+  "experiment_reruns": 0,
+  "archive_portability": "Verified by extraction and running the public checker outside the project."
+}

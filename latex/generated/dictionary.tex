@@ -1,0 +1,75 @@
+\subsection*{Own-market state}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{ret_1d}\newline Removed by MI & ln(P\textsubscript{t} / P\textsubscript{t-1})\par Last-session momentum or reversal.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{ret_5d}\newline Retained & ln(P\textsubscript{t} / P\textsubscript{t-5})\par Short trend in the currency quote.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{ret_20d}\newline Removed by MI & ln(P\textsubscript{t} / P\textsubscript{t-20})\par Medium trend in the currency quote.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{abs_ret_1d}\newline Retained & |ln(P\textsubscript{t} / P\textsubscript{t-1})|\par Size of the latest move; may describe changing volatility.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{vol_20}\newline Retained & s\textsubscript{20}(r)\textsubscript{t} = \ensuremath{\sigma}\textsubscript{20,t}\par Trailing volatility sets the scaled part of the label hurdle. This is not the full hurdle when the floor binds.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{vol_5_over_20}\newline Removed by MI & s\textsubscript{5}(r)\textsubscript{t} / s\textsubscript{20}(r)\textsubscript{t}\par Recent volatility relative to its longer baseline.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{dist_ma20}\newline Removed by MI & P\textsubscript{t} / mean(P\textsubscript{t-19}, \ldots{}, P\textsubscript{t}) - 1\par Distance from a trailing price average; a possible stretch or trend state.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{dist_ma60}\newline Retained & P\textsubscript{t} / mean(P\textsubscript{t-59}, \ldots{}, P\textsubscript{t}) - 1\par Distance from a trailing price average; a possible stretch or trend state.\par \emph{Calendar:} Retained FX sessions\\[5pt]
+\path{tokyo_reference_to_ny_close}\newline Retained & P\textsubscript{t} / BOJfix\textsubscript{latest} - 1\par Move since the Tokyo reference, including European trading; compares an interbank midpoint with a vendor composite close.\par \emph{Calendar:} FX decisions + Tokyo reference\\[5pt]
+\path{weekend_in_window}\newline Retained & \ensuremath{\mathbf1}\{(t, t+1] spans a Saturday or Sunday\}\par Scheduled exposure to weekend news, without future market information.\par \emph{Calendar:} Retained FX decision calendar\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Relative rates}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{gap2y}\newline Retained & US2y\textsubscript{latest} - JGB2y\textsubscript{latest}\par Relative yield level as policy and carry context.\par \emph{Calendar:} US and Tokyo legs aligned separately\\[5pt]
+\path{gap2y_chg_1d}\newline Retained & gap2y\textsubscript{t} - gap2y\textsubscript{t-1}\par Change in the aligned rate differential as a policy-repricing hypothesis.\par \emph{Calendar:} Decision rows\\[5pt]
+\path{gap2y_chg_5d}\newline Retained & gap2y\textsubscript{t} - gap2y\textsubscript{t-5}\par Change in the aligned rate differential as a policy-repricing hypothesis.\par \emph{Calendar:} Decision rows\\[5pt]
+\path{us_slope_chg_5d}\newline Removed by MI & (US10y - US2y)\textsubscript{d} - (US10y - US2y)\textsubscript{d-5}\par Change in the US curve as a policy and growth-expectations hypothesis.\par \emph{Calendar:} US Treasury sessions\\[5pt]
+\path{jp_slope_chg_5d}\newline Retained & (JGB10y - JGB2y)\textsubscript{d} - (JGB10y - JGB2y)\textsubscript{d-5}\par Change in the Japanese curve as a BOJ-expectations hypothesis.\par \emph{Calendar:} Tokyo MOF sessions\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Japanese sectors}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{banks_rel_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(Banks) - \ensuremath{\ell}\textsubscript{5}(TOPIX)\par Banks relative to the Japanese market as a domestic-rate hypothesis.\par \emph{Calendar:} Tokyo source sessions\\[5pt]
+\path{banks_rel_20d}\newline Retained & \ensuremath{\ell}\textsubscript{20}(Banks) - \ensuremath{\ell}\textsubscript{20}(TOPIX)\par Slower bank-sector relative performance.\par \emph{Calendar:} Tokyo source sessions\\[5pt]
+\path{elec_rel_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(Elec \& Precision) - \ensuremath{\ell}\textsubscript{5}(TOPIX)\par Broad electronics relative performance; not a semiconductor or exporter basket.\par \emph{Calendar:} Tokyo source sessions\\[5pt]
+\path{topix_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(TOPIX)\par Broad Japanese equity risk context.\par \emph{Calendar:} Tokyo source sessions\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Global risk and equities}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{vix}\newline Retained & VIX\textsubscript{d}\par Level of implied equity volatility as a stress-state hypothesis.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{vix_chg_1d}\newline Retained & VIX\textsubscript{d} - VIX\textsubscript{d-1}\par Change in implied volatility; possible stress repricing.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{vix_chg_5d}\newline Retained & VIX\textsubscript{d} - VIX\textsubscript{d-5}\par Change in implied volatility; possible stress repricing.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{spy_1d}\newline Retained & \ensuremath{\ell}\textsubscript{1}(SPY)\par US equity performance as broad risk context.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{spy_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(SPY)\par US equity performance as broad risk context.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{qqq_minus_spy_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(QQQ) - \ensuremath{\ell}\textsubscript{5}(SPY)\par Growth and technology leadership relative to the broad market.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{qqq_minus_spy_20d}\newline Retained & \ensuremath{\ell}\textsubscript{20}(QQQ) - \ensuremath{\ell}\textsubscript{20}(SPY)\par Slower growth-versus-market rotation.\par \emph{Calendar:} US source sessions\\[5pt]
+\path{smh_minus_qqq_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(SMH) - \ensuremath{\ell}\textsubscript{5}(QQQ)\par Semiconductor leadership relative to the technology-heavy index.\par \emph{Calendar:} US source sessions\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Dollar and relative yen performance}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{usd_basket_5d}\newline Retained & B\textsubscript{5,t} = (-\ensuremath{\ell}\textsubscript{5}(EURUSD) - \ensuremath{\ell}\textsubscript{5}(GBPUSD) - \ensuremath{\ell}\textsubscript{5}(AUDUSD) + \ensuremath{\ell}\textsubscript{5}(USDCAD) + \ensuremath{\ell}\textsubscript{5}(USDCHF)) / 5\par Custom equal-weight dollar proxy excluding yen; not the official broad dollar index.\par \emph{Calendar:} Common USD/JPY FX endpoints\\[5pt]
+\path{yen_relative_5d}\newline Retained & ret\_5d - B\textsubscript{5,t}\par Relative performance under unit basket exposure; not a pure yen shock. Exactly collinear with its two components.\par \emph{Calendar:} Common USD/JPY FX endpoints\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Commodities}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{wti_5d_lagged}\newline Retained & \ensuremath{\ell}\textsubscript{5}(WTI)\textsubscript{d-1}, released with observation d\par Oil-price context for an energy importer; spot observations, not a futures trading return.\par \emph{Calendar:} EIA/FRED native observation sequence\\[5pt]
+\path{gld_5d}\newline Retained & \ensuremath{\ell}\textsubscript{5}(GLD)\par Gold as a monetary and risk-context hypothesis.\par \emph{Calendar:} US source sessions\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Positioning and stress}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{cftc_net}\newline Retained & q\textsubscript{j} = (LF longs\textsubscript{j} - LF shorts\textsubscript{j}) / open interest\textsubscript{j}\par Leveraged-fund yen positioning; positive means net long yen.\par \emph{Calendar:} Distinct CFTC report sequence\\[5pt]
+\path{cftc_net_chg_4reports}\newline Retained & q\textsubscript{j} - q\textsubscript{j-4}\par Building or unwinding positioning across reports; four reports need not mean four weeks.\par \emph{Calendar:} Distinct CFTC report sequence\\[5pt]
+\path{cftc_release_age_days}\newline Retained & round(audit hours since release, 3) / 24\par Age of published information, distinct from the age of the positions it describes. The existing formula uses audit hours rounded to three decimals before dividing by 24.\par \emph{Calendar:} Decision rows / actual release timestamps\\[5pt]
+\path{pos_z}\newline Retained & z\textsubscript{52 reports}(q)\textsubscript{j}\par Positioning relative to its own trailing report history.\par \emph{Calendar:} Last 52 distinct CFTC reports\\[5pt]
+\path{vol_z}\newline Retained & z\textsubscript{260}(vol\_20)\textsubscript{t}\par Volatility relative to its own trailing decision history.\par \emph{Calendar:} Last 260 decision rows\\[5pt]
+\path{short_yen_stress}\newline Retained & max(0, -q\textsubscript{j}) \ensuremath{\times} max(0, vol\_z\textsubscript{t})\par Observed net short-yen exposure during above-normal volatility; not total market carry leverage.\par \emph{Calendar:} Aligned reports \ensuremath{\times} decision rows\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Calendar and events}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{event_in_window}\newline Retained & \ensuremath{\mathbf1}\{a scheduled event falls in (17:00 t, 17:00 t+1]\}\par Scheduled-news exposure; contains no announcement result.\par \emph{Calendar:} Known event schedules / decision intervals\\[5pt]
+\bottomrule\end{longtable}\endgroup
+\subsection*{Additional interaction}
+\begingroup\small\begin{longtable}{@{}p{.28\linewidth}p{.66\linewidth}@{}}\toprule
+Feature / final status & Definition and hypothesis\\\midrule\endhead
+\path{gapchg_x_vixchg}\newline Retained & z\textsubscript{260}(gap2y\_chg\_5d)\textsubscript{t} \ensuremath{\times} z\textsubscript{260}(vix\_chg\_5d)\textsubscript{t}\par Conditional joint rate and volatility state as a policy/risk hypothesis.\par \emph{Calendar:} Last 260 decision rows\\[5pt]
+\bottomrule\end{longtable}\endgroup

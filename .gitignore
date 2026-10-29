@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+.env
+data/raw/
+private/
+local_only/
+*.joblib
+*.pkl
+*.cbm
+*.aux
+*.log
+*.bbl
+*.blg
+*.synctex.gz
+tmp/

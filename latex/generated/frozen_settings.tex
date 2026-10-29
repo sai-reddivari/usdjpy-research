@@ -1,0 +1,9 @@
+\begingroup\small\begin{longtable}{@{}p{.22\linewidth}p{.41\linewidth}rrr@{}}\toprule
+Procedure & Configuration & Trees & Inner AUC & $\tau$\\\midrule\endhead
+LightGBM: shortlist & leaves 15; rows 20; rate 0.1; gain 0.1 & 5 & 0.638 & 0.333\\
+XGBoost: shortlist & depth 3; weight 1; rate 0.1; gamma 1.0 & 128 & 0.612 & 0.335\\
+CatBoost: shortlist & depth 4; L2 10; rate 0.1; strength 3 & 18 & 0.653 & 0.342\\
+LightGBM: own price & leaves 15; rows 40; rate 0.03; gain 0.0 & 7 & 0.636 & 0.319\\
+XGBoost: own price & depth 3; weight 5; rate 0.1; gamma 1.0 & 15 & 0.621 & 0.318\\
+CatBoost: own price & depth 4; L2 3; rate 0.03; strength 1 & 5 & 0.597 & 0.472\\
+\bottomrule\end{longtable}\endgroup

@@ -1,0 +1,16 @@
+cohort,quarter,n,n_positive
+original229,R1,35,8
+original229,R2,64,18
+original229,R3,65,21
+original229,R4,65,17
+original229,pooled,229,64
+companion258,R1,64,19
+companion258,R2,64,18
+companion258,R3,65,21
+companion258,R4,65,17
+companion258,pooled,258,75
+previously_excluded29,R1,29,11
+previously_excluded29,R2,0,0
+previously_excluded29,R3,0,0
+previously_excluded29,R4,0,0
+previously_excluded29,pooled,29,11

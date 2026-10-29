@@ -1,0 +1,16 @@
+# Direct dependencies of the usdjpy package, scripts and tests, pinned to the
+# versions the frozen models were fitted and scored with (frozen_manifest.json).
+# Python itself: 3.14.8 (recorded separately; the scripts check it).
+numpy==2.5.3
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+lightgbm==4.7.0
+xgboost==3.4.1
+catboost==1.2.10
+shap==0.54.1
+joblib==1.6.0
+matplotlib==3.11.2
+# Notebooks only:
+ipykernel==7.4.0
+# Optional: certifi (used for TLS during acquisition when installed; not needed offline).

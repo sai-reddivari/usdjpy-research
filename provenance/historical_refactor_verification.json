@@ -1,0 +1,388 @@
+{
+  "counts": {
+    "passed": 63,
+    "failed": 0,
+    "unavailable": 0
+  },
+  "results": [
+    {
+      "module": "test_safe_execution",
+      "test": "test_imports_make_no_request_fit_or_write",
+      "status": "passed",
+      "seconds": 2.78
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_output_dir_refuses_every_protected_folder",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_private_writer_refuses_the_project_tree",
+      "status": "passed",
+      "seconds": 0.27
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_missing_private_inputs_raise_instead_of_falling_back",
+      "status": "passed",
+      "seconds": 0.33
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_training_script_refuses_without_authorisation_or_with_protected_output",
+      "status": "passed",
+      "seconds": 35.27
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_scoring_script_refuses_protected_output",
+      "status": "passed",
+      "seconds": 6.7
+    },
+    {
+      "module": "test_safe_execution",
+      "test": "test_notebooks_run_offline_top_to_bottom",
+      "status": "passed",
+      "seconds": 6.01
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_reference_files_match_acceptance_hashes",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_public_observation_files_byte_identical",
+      "status": "passed",
+      "seconds": 4.66
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_public_aligned_files_byte_identical",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_private_observation_and_aligned_files_byte_identical",
+      "status": "passed",
+      "seconds": 3.72
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_development_feature_files_equal_saved",
+      "status": "passed",
+      "seconds": 0.97
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_public_only_feature_build_equals_saved_public_file",
+      "status": "passed",
+      "seconds": 2.21
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_event_timing_exceptions_equal_saved",
+      "status": "passed",
+      "seconds": 0.08
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_reserved_feature_and_label_files_equal_saved",
+      "status": "passed",
+      "seconds": 1.01
+    },
+    {
+      "module": "test_data_equivalence",
+      "test": "test_reserved_build_leaves_development_rows_unchanged",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "module": "test_timing",
+      "test": "test_cleaning_drops_sundays_and_holiday_stubs",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_timing",
+      "test": "test_volatility_warm_up_and_window_ends",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_timing",
+      "test": "test_friday_to_monday_rows_carry_the_weekend_flag",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "module": "test_timing",
+      "test": "test_tokyo_clock_follows_us_daylight_saving_and_tse_close_change",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_timing",
+      "test": "test_placeholder_times_are_replaced_by_canonical_retiming",
+      "status": "passed",
+      "seconds": 0.14
+    },
+    {
+      "module": "test_timing",
+      "test": "test_positioning_and_long_windows_warm_up_as_specified",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "module": "test_timing",
+      "test": "test_2023_cftc_disruption_uses_special_announcement_dates",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_timing",
+      "test": "test_35_day_cap_is_measured_from_observation_time",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_timing",
+      "test": "test_2025_catch_up_sequence_matches_the_reserved_build_record",
+      "status": "passed",
+      "seconds": 0.01
+    },
+    {
+      "module": "test_timing",
+      "test": "test_reserved_extension_cannot_change_development_calendars",
+      "status": "passed",
+      "seconds": 0.08
+    },
+    {
+      "module": "test_timing",
+      "test": "test_reserved_scoring_rows_and_the_29_excluded_dates",
+      "status": "passed",
+      "seconds": 0.06
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_locked_dataset_equals_historical_dataset",
+      "status": "passed",
+      "seconds": 0.07
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_outer_and_inner_folds_equal_historical_code",
+      "status": "passed",
+      "seconds": 0.19
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_purge_boundaries_hold_with_timestamps",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_fold_sizes_equal_every_saved_run_record",
+      "status": "passed",
+      "seconds": 0.13
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_outer_validation_rows_equal_every_saved_prediction_file",
+      "status": "passed",
+      "seconds": 0.18
+    },
+    {
+      "module": "test_split_equivalence",
+      "test": "test_final_fold_equals_historical_code_and_frozen_record",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_selection_settings_equal_saved_run_records",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_grids_and_extra_knobs_equal_saved_order",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_saved_model_lists_equal_experiment_definitions",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_saved_feature_lists_follow_the_saved_selection",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_negative_control_settings_and_shift_set",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_frozen_manifest_equals_final_procedure_definition",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_frozen_shortlist_and_model_feature_lists",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "module": "test_configuration_mapping",
+      "test": "test_historical_runs_left_the_elastic_net_unseeded",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_frozen_files_match_recorded_hashes",
+      "status": "passed",
+      "seconds": 0.05
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_fingerprints_reproduce_exactly",
+      "status": "passed",
+      "seconds": 0.07
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_positive_class_feature_order_and_iteration_counts",
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_new_and_historical_prediction_functions_agree_exactly",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_reserved_predictions_equal_saved_files",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_frozen_thresholds_give_the_saved_class_assignments",
+      "status": "passed",
+      "seconds": 0.03
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_supplementary_258_row_scores_equal_saved",
+      "status": "passed",
+      "seconds": 0.04
+    },
+    {
+      "module": "test_frozen_predictions",
+      "test": "test_reserved_shap_values_equal_saved_public_columns",
+      "status": "passed",
+      "seconds": 12.42
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_runs_a_and_b_auc_tables_equal_saved",
+      "status": "passed",
+      "seconds": 0.54
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_runs_a_and_b_paired_tables_equal_saved",
+      "status": "passed",
+      "seconds": 0.42
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_runs_a_and_b_confusion_counts_equal_saved",
+      "status": "passed",
+      "seconds": 0.16
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_run_c_comparison_tables_equal_saved",
+      "status": "passed",
+      "seconds": 0.29
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_reserved_tables_equal_saved",
+      "status": "passed",
+      "seconds": 0.15
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_report_display_tables_byte_identical",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_display_script_reproduces_report_figures",
+      "status": "passed",
+      "seconds": 3.07
+    },
+    {
+      "module": "test_summary_tables",
+      "test": "test_latex_table_values_match_display_tables",
+      "status": "passed",
+      "seconds": 0.02
+    },
+    {
+      "module": "test_synthetic_differential",
+      "test": "test_selection_funnel_old_vs_new",
+      "status": "passed",
+      "seconds": 19.18
+    },
+    {
+      "module": "test_synthetic_differential",
+      "test": "test_seeded_elastic_net_old_vs_new",
+      "status": "passed",
+      "seconds": 0.19
+    },
+    {
+      "module": "test_synthetic_differential",
+      "test": "test_development_boosters_and_baselines_old_vs_new",
+      "status": "passed",
+      "seconds": 35.93
+    },
+    {
+      "module": "test_synthetic_differential",
+      "test": "test_final_fits_old_vs_new",
+      "status": "passed",
+      "seconds": 15.07
+    },
+    {
+      "module": "test_synthetic_differential",
+      "test": "test_guarded_freeze_entry_point_wiring_on_synthetic_data",
+      "status": "passed",
+      "seconds": 20.31
+    },
+    {
+      "module": "protected_files",
+      "test": "reference_files_unchanged_and_changes_allowlisted",
+      "status": "passed",
+      "seconds": 0
+    }
+  ],
+  "retry_note": "Three private scratch checks rerun successfully with a writable private temporary directory. Baseline hashes retained; only recorded companion additions authorised."
+}

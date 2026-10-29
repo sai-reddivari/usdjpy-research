@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-29",
+  "scope": "Public editorial adaptation; no fitting, selection, acquisition or prediction recomputation.",
+  "original_submission_preserved": true,
+  "code_unchanged_from_verified_refactor": {
+    "usdjpy/config.py": "5646d664556c93acc4a58f52309dc1cb022000fe154ce98ea2261a50b7c8570b",
+    "usdjpy/models.py": "c6f047e360994762c5248b46d7359cae9e0e58c7d61170e28bf55e58c58a54fa",
+    "usdjpy/evaluation.py": "2dd12e0ceab1cab20b07689a792a815a0d159fbed57a984f9f495eea1baa7637",
+    "usdjpy/__init__.py": "e7c59da94d8841b93f9ea85272b866a759768acd4d087509817f9fbb62c4f31b",
+    "usdjpy/features.py": "3cd6118a6d6b15020336273ae2357e05f8821dc7cd5eded6fef883788804c3c8",
+    "usdjpy/sources.py": "074806e9f1a855dac16dfc3a255ec7e02309c6eba5f4188548fd7ddcde301a54",
+    "usdjpy/experiments.py": "1b2d267ab1348d5cb897fbe6d1c8a8a45c44cb92a100fa89a7acbd08c1a0ab82",
+    "usdjpy/timing.py": "4c42e6e48ad2402effe792811aa4c0ffe6937f33dbcbed966a96edee003561ed",
+    "usdjpy/target.py": "0dede2320c523e1dc28577627c3cb08cd555e090545553b32c233c2e01742a14",
+    "usdjpy/splits.py": "2fb5c20d4a5bf27d9f584324cd60ada5f0912ff953987f63fecec4a76f89f97e",
+    "usdjpy/selection.py": "f8d8ec2ca764127c3362d7b3f62e4d907f706108847fe5f81f32e726528202e7"
+  },
+  "saved_evidence_sha256": {
+    "results/run_a_quarterly.csv": "16c1f4947af83382f77822bbbb0e32a3da87706555ab48de4ca0a7c4f45377cf",
+    "results/reserved_classification.csv": "a282f3c9cac0ee32937d5534178d239d933abe4516f1c3324e99fd1409a6d562",
+    "results/frozen_configuration_summary.json": "fa4445eb5a8fef52ad172b2a620b91661bbd449ff9fca4b907a033aac29c9504",
+    "results/paired_quarterly_differences.csv": "366a907b9a167dce82471bcf37024074a49b9e928d759df525d3a6abc83a50bf",
+    "results/posthoc_auc_summary.csv": "c3a1b954622e6d7f2dbe4aedc4ea6c5e6026c7dfd89d9b8541834fe0836f251a",
+    "results/run_b_quarterly.csv": "4f395a059aaab048e27b53ab9781979353ea996ae5251ec7e4866ddcb8ad1fb6",
+    "results/feature_dictionary.json": "6d75139afb7b63b0a1bb921a1cf1b53eebc5f5fa90764c4045e117bd4ccfe7ae",
+    "results/posthoc_matched_twin_differences.csv": "a3cfa0a84c4cb4810cda198d9c197bf3cb8f9d71a71010330dde3b94f46c3b33",
+    "results/no_wrapper_quarterly.csv": "2ed7bb092f9a24e2ecc256974b07462fd998e0ed17e6cb602c390a6591f2592c",
+    "results/posthoc_cohort_counts.csv": "9d9de3946810504b1709c866149f7ad98dff36f34f908798137070765b81328d",
+    "results/matched_control_summary.csv": "eacc295107b76bb02ae150c420f507bada22a7d1a89dc330e2697375f501ddac",
+    "results/reserved_calibration.csv": "632edfecf2d763b847949abe0cd252fc3dce825b6c3bb77d1cca72a30261a114",
+    "results/reserved_shap_mean_abs_per_quarter.csv": "50d57c1616e59584c2e6bcc33040dc2a205891c15b39823841a9638007d23072",
+    "results/reserved_quarterly.csv": "45769f765394ad3cfdc480caab792fe3813ac0283f8c239fc19c20cb898dba59"
+  },
+  "frozen_summary": "Allowlisted configuration fields extracted from the original frozen manifest; excludes model files and row fingerprints.",
+  "historical_verification": "63 checks passed in the complete original environment; not re-executed for this public edition.",
+  "assistance": "Sai directed and reviewed the study. Codex/Claude assisted source research, Python implementation and execution, checks, refactoring, mathematics and drafting."
+}

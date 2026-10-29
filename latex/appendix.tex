@@ -1,0 +1,196 @@
+\documentclass[11pt,a4paper]{article}
+\input{style}
+\hypersetup{pdftitle={Technical appendix: Economic features and selection risk in USD/JPY}}
+\fancyfoot[L]{\footnotesize\color{muted}Optional technical appendix}
+\begin{document}
+\thispagestyle{plain}
+{\small\sffamily\color{muted}TECHNICAL APPENDIX \hfill 29 OCTOBER 2026}\par
+\vspace{10pt}
+{\LARGE\bfseries\color{ink}Economic features and selection risk in daily USD/JPY forecasting\par}
+\vspace{8pt}Sai Reddivari\par
+This companion records the formulas, operational conventions and saved results behind the main study. It is optional reading, not a second experiment. No models were fitted or scored for this public adaptation. Definitions distinguish theoretical mechanisms from the library settings actually used. The underlying project originated in applied CQF research; course materials and the exam paper are not redistributed.
+
+\section*{1. Target, clocks and transformations}
+The target uses simple returns, while several momentum features use log returns. With $r_t=P_t/P_{t-1}-1$,
+\[
+\bar r_{20,t}=\frac1{20}\sum_{j=0}^{19}r_{t-j},\quad
+\widehat\sigma_{20,t}^2=\frac1{19}\sum_{j=0}^{19}(r_{t-j}-\bar r_{20,t})^2,\quad
+Y_t=\mathbf1\{r_{t+1}>\max(0.001,0.5\widehat\sigma_{20,t})\}.
+\]
+The window includes the return into $t$, not the future outcome. A Friday decision runs to the next retained session, not necessarily a 24-hour horizon. No current observation is removed simply because the future return is near zero.
+
+Under a temporary illustration $r_{t+1}\mid\mathcal F_t\sim N(\mu_t,\sigma_t^2)$,
+\[
+\Pr(Y_t=1\mid\mathcal F_t)=
+1-\Phi\!\left(\frac{\max(0.001,0.5\widehat\sigma_{20,t})-\mu_t}{\sigma_t}\right).
+\]
+If the floor is inactive, estimated and conditional volatility coincide and drift is small, this is approximately $1-\Phi(0.5)=0.309$. It motivates scaling, not an assumption that class rates are constant. The floor binds on one of 1,277 labelled development rows and 21 of 65 reserved R3 decisions, with no binding rows in the other reserved quarters.
+
+\subsection*{Native transformations precede the as-of join}
+Write $\ell_k(A)_d=\log A_d-\log A_{d-k}$ on asset $A$'s native observations. If $\log A_d=\log A_{d-1}+\mu+\epsilon_d$ with stationary increments, $\ell_1(A)_d=\mu+\epsilon_d$ is stationary. The premise is essential: this argument does not establish stationarity for the observed financial series, volatility, levels, cross-asset spreads or rolling statistics. Fractional differentiation was not used.
+
+For a source with availability time $a_j$, the decision uses $j^*(t)=\max\{j:a_j\le d_t\}$ in chronological availability order. Carrying an old observation forward is not a new measurement. Native-session returns and weekly-report differences are computed before that join; aligned US--Japan gaps use the latest eligible legs, retaining both leg dates.
+
+Trailing standardization is $z_n(x)_t=(x_t-\bar x_{n,t})/s_{n,t}$, with sample SD, current available observation included, full warm-up required and denominator at least $10^{-12}$. Positioning uses 52 distinct reports; daily volatility and interaction components use 260 decision rows. Fold-fitted scaling for elastic net is a different operation, learned on each inner training set alone.
+
+\Needspace{8\baselineskip}
+\subsection*{Source-specific availability conventions}
+\begingroup\small
+\begin{longtable}{@{}p{.22\linewidth}p{.29\linewidth}p{.43\linewidth}@{}}\toprule
+Input / source & Assigned availability & Qualification\\\midrule\endhead
+FX / FMP & Daily bar assigned to 17:00 New York & Provisional boundary; close-derived features and labels inherit it. Basket uses the same source/clock.\\
+US ETFs / FMP & 16:05 New York & Five-minute buffer after regular-session close; historical delivery timestamps are not verified.\\
+VIX / FRED-Cboe & 16:20 New York & Adopted 16:15 observation plus buffer.\\
+US yields / FRED & 16:30 New York & Adopted afternoon availability, not a verified provider latency log.\\
+Japanese sectors / J-Quants & 15:35 JST & Tokyo close changed from 15:00 to 15:30 on 5 November 2024; conservative visibility convention and native-calendar construction.\\
+Japanese yields / MOF & 15:05 JST & Market-visibility assumption for 15:00 observations, rather than the later MOF posting time.\\
+BOJ FX reference & 17:05 JST & Adopted visibility of 17:00 midpoint; reference-to-close move spans Europe as well as New York.\\
+CFTC yen reports & Actual release date, 15:35 New York & Observation date and release date differ. Original age cap: 35 days from observation.\\
+WTI / FRED-EIA & Previous native observation, released with next observation's adopted 15:00 New York time & Conservative one-observation lag; historical posting time unverified.\\
+Event calendar & Schedule known by decision cutoff & No announcement result. Some rescheduling timing remains unresolved and is flagged.\\\bottomrule
+\end{longtable}\endgroup
+New York time uses daylight-saving conversion; Tokyo remains JST. Latest-vintage downloads and visibility conventions are not a point-in-time database. Four reserved event flags exist, but three lie in the original positioning exclusion: removing the one remaining flagged row from the 229-row primary sample changes mean AUC by at most about 0.0052. The final training fit excludes nine flagged development dates.
+
+\section*{2. Selection objectives and executed rules}
+\subsection*{Structural filtering and the light marginal screen}
+Stage A checks finite, nonmissing values, removes constants and byte-identical columns, and clusters by distance $d_{ij}=1-|\rho^{S}_{ij}|$ with complete linkage at 0.10. Representatives follow declared conditional preferences; otherwise the feature with highest mean absolute within-cluster correlation is retained. The rule uses the outer training window and no label. Components can remain available for constructions even if not retained as standalone inputs.
+
+Stage B estimates mixed discrete/continuous mutual information:
+\[
+I(X;Y)=\sum_y\int p(x,y)\log\frac{p(x,y)}{p(x)p(y)}\,dx.
+\]
+It uses \path{mutual_info_classif}, three neighbours and seed zero; event/weekend flags are declared discrete \cite{sklearn191_mi,ross2014mi}. For $p$ eligible columns, the lowest $\lfloor p/4\rfloor$ ranks in each of three inner training folds are marked. A column is removable only if it is in this bottom group in all three folds. Removal proceeds in increasing mean MI, protecting the final eligible member of a family and declared interactions/components. This is a light ranking rule, not a hypothesis test against a shifted-label cutoff.
+
+\subsection*{The selector union preserves complementary routes}
+The linear route standardizes on inner training data and fits logistic elastic net. With $p_i=\sigma(b+x_i^\top\beta)$ and $\rho=0.5$, its equivalent mean-loss objective for unit weights is
+\[
+J(b,\beta)=\frac1n\sum_i[-y_i\log p_i-(1-y_i)\log(1-p_i)]
++\frac1{nC}\left[\frac{1-\rho}{2}\|\beta\|_2^2+\rho\|\beta\|_1\right].
+\]
+The intercept is unpenalized. $C\in\{0.01,0.03,0.1,0.3,1\}$ is chosen by mean inner AUC, with ties favouring smaller $C$; a candidate has a nonzero coefficient in at least two of three fits. Solver: SAGA, tolerance $10^{-4}$, maximum 20,000 iterations \cite{sklearn191_logistic}. The yen-relative contrast is held out of this linear route because it equals own five-day return minus the dollar basket; the independent basis retains those two components. Trees can still see the contrast.
+
+The nonlinear route uses LightGBM with seven leaves, depth cap three, minimum nominal leaf size 40, learning rate 0.03, L2 of one and 80\% row/column sampling. Run A uses AUC early stopping (cap 600, patience 50). B, C and final use 150 fixed trees. Grouped permutation importance is
+\[
+D_{g,k}=\frac1{20}\sum_{b=1}^{20}
+\left[AUC(y_k,\hat p_k)-AUC(y_k,\hat p_k^{\,\pi_{g,b}})\right].
+\]
+All members of group $g$ share the same row permutation in a repeat. A group enters with positive mean drop in at least two inner folds. Permutation breaks feature relationships and is a selection heuristic, not a causal intervention. The union of linear/nonlinear candidates is supplemented by the declared interactions and available components.
+
+\subsection*{The wrapper and why a chronological score can still be optimized to noise}
+For subset $S$, the wrapper scorer is $\widehat A(S)=\frac13\sum_{k=1}^3 AUC_k(S)$. At each step it tests single-column and applicable group removals and follows the best mean score. Cached subsets are reused. A new candidate consumes three fits; the path stops at the budget or a single feature. Across all evaluated subsets $\mathcal E$, the selected subset is
+\[
+S^*=\arg\min_{S\in\mathcal E}|S|
+\quad\text{subject to}\quad
+\widehat A(S)\ge\max_{U\in\mathcal E}\widehat A(U)-0.005,
+\]
+with higher score breaking size ties. Thus 0.005 is a subset-selection tolerance, not a significance threshold or an early stopping threshold for the path. Budgets were 400 fits in A and 2,000 in B. The three declared interaction comparisons were outside that wrapper cap. C and final omit both wrapper and separate interaction comparisons.
+
+The same inner quarters support repeated choices. As the number of candidates grows, $\max_S\widehat A(S)$ can increase because of estimation error rather than true improvement. Purging prevents label overlap; it does not remove this adaptive search optimism. Development comparisons and the shifted-label diagnostics examine that distinction.
+
+\subsection*{Negative-control scope}
+Twenty circular shifts were built from $k_j=\operatorname{round}(300+677j/19)$ for $j=0,\ldots,19$, replacing the closest available entries with anchors 319, 426 and 639. The shift was applied to the complete 1,277-row label vector; minimum circular separation was at least 300. The reduced B chain uses its selection model for final prediction, not the full three-booster grids. Real and shifted statistics are compared only within the same procedure. The public CSV retains all three diagnostic summaries. Circular shifts are not exchangeable draws from a fully justified null, so exceedance counts are not reported as calibrated p-values.
+
+\section*{3. Boosting mathematics and actual architecture choices}
+For margin $F$, binary logistic loss is $\ell(y,F)=\log(1+e^F)-yF$, with $g=p-y$ and $h=p(1-p)$, where $p=\sigma(F)$. Adding tree $f(x)=w_{q(x)}$ gives the second-order approximation
+\[
+\widetilde{\mathcal L}=\sum_i[g_i f(x_i)+\tfrac12h_i f(x_i)^2]
++\gamma T+\alpha\sum_{j=1}^T|w_j|+\tfrac\lambda2\sum_{j=1}^T w_j^2.
+\]
+For leaf $j$, write $G_j=\sum_{i\in I_j}g_i$, $H_j=\sum_{i\in I_j}h_i$ and soft threshold $\mathcal S_\alpha(G)=\operatorname{sgn}(G)\max(|G|-\alpha,0)$. Assuming $H_j+\lambda>0$,
+\[
+w_j^*=-\frac{\mathcal S_\alpha(G_j)}{H_j+\lambda},\qquad
+\widetilde{\mathcal L}^{\,*}=-\frac12\sum_j
+\frac{\mathcal S_\alpha(G_j)^2}{H_j+\lambda}+\gamma T.
+\]
+The canonical gain for splitting parent $P$ is
+\[
+\frac12\left[
+\frac{\mathcal S_\alpha(G_L)^2}{H_L+\lambda}
++\frac{\mathcal S_\alpha(G_R)^2}{H_R+\lambda}
+-\frac{\mathcal S_\alpha(G_P)^2}{H_P+\lambda}\right]-\gamma.
+\]
+L1 can zero a leaf update; L2 shrinks it and changes split valuation. Shrinkage multiplies added-tree output by the learning rate after fitting. These equations describe a common second-order formulation, not an assertion of identical normalization or splitting criteria in every library.
+
+The recorded XGBoost/LightGBM implementations compare an unhalved score, so raw split penalties must be interpreted on their code scale. LightGBM picks the current leaf with the largest available split gain; configured XGBoost uses depth-wise expansion with histogram splits. XGBoost also supports other growth policies, which were not used here \cite{lightgbm470_source,xgboost_source}.
+
+CatBoost uses symmetric trees: one split condition at each depth is applied to all current nodes. The recorded CPU split criterion is Cosine rather than the Hessian gain above. With negative-gradient sum $D_j$, scoring weight $W_j$ and regularized average $a_j=D_j/(W_j+\lambda_{\rm scaled})$, its deterministic score is proportional to
+\[
+\frac{\sum_j a_jD_j}{\sqrt{\sum_j a_j^2W_j}}.
+\]
+Split-score noise is controlled by \path{random_strength}; leaf values subsequently use regularized Newton estimation. Effective defaults matter: expanded CatBoost used ten leaf-estimation iterations, own-price CatBoost one \cite{catboost_source,catboost_params}.
+
+\subsection*{Ordered statistics explain an architecture, not these results}
+For category $c_i$, an ordered target statistic can use a permutation $\pi$:
+\[
+\widehat x_i=\frac{\sum_{j:\pi(j)<\pi(i)}\mathbf1\{c_j=c_i\}y_j+a\,p_0}
+{\sum_{j:\pi(j)<\pi(i)}\mathbf1\{c_j=c_i\}+a}.
+\]
+Excluding $y_i$ prevents its direct encoding into its own feature. Ordered boosting applies related ordering to residual estimation; these are distinct mechanisms \cite{prokhorenkova2018catboost}. Neither supplies a calendar-time availability guarantee. This study used numeric features and Plain boosting, so no categorical target statistic or Ordered boosting explains the results. The constructor passed \path{has_time=True}; its absence in fitted read-back was documented, and no beneficial effect was inferred.
+
+\Needspace{8\baselineskip}
+\section*{4. Tuning, refit and threshold specification}
+\begingroup\small
+\begin{longtable}{@{}p{.17\linewidth}p{.76\linewidth}@{}}\toprule
+Model & Grid (Cartesian product: sixteen configurations from B onward)\\\midrule\endhead
+LightGBM & leaves $\{7,15\}$; nominal minimum child rows $\{20,40\}$; learning rate $\{0.03,0.1\}$; minimum split gain $\{0,0.1\}$. L2 fixed at one; 80\% row/column sampling.\\
+XGBoost & depth $\{3,4\}$; minimum child Hessian sum $\{1,5\}$; learning rate $\{0.03,0.1\}$; gamma $\{0,1\}$. L2 one; histogram, depth-wise growth; 80\% row/column sampling.\\
+CatBoost & depth $\{4,6\}$; L2 $\{3,10\}$; learning rate $\{0.03,0.1\}$; random strength $\{1,3\}$. Symmetric trees; Bernoulli 80\% row sampling; no column subsampling.\\\bottomrule
+\end{longtable}\endgroup
+Run A uses the first three dimensions with the extra knob at default. Grids are coarse sample-size-driven choices, not assertions that an optimum is contained. XGBoost's Hessian floor differs from a row-count floor: $H_j=\sum_i p_i(1-p_i)\le n_j/4$, so $H_j\ge w$ implies at least $4w$ rows and usually more. LightGBM approximates nominal counts through Hessian calculations; its minimum row parameter is not an exact universal count bound. Symmetric CatBoost does not apply the same per-leaf minimum-row mechanism \cite{lightgbm470_params,xgboost_params,catboost_params}.
+
+For every configuration: fit each inner training block with AUC early stopping on its own validation block, cap 1,000 trees, patience 50. Select highest mean inner AUC, ties to the first grid entry. Refit on the complete purged training window using the chosen configuration's tree count from the latest inner fold. No outer or reserved observations select it. Thresholds are midpoints between distinct pooled inner probabilities, maximizing balanced accuracy; first maximum wins, with 0.5 fallback for fewer than two distinct probabilities. Training loss, tuning AUC and classification threshold objective are different quantities.
+
+\input{generated/frozen_settings.tex}
+\captiontext{Frozen metadata only; no model binaries or training observations are included. Counts come from the latest inner fold, not a reserved-year optimization.}
+
+Recorded environment: Python 3.14.8, NumPy 2.5.3, pandas 3.0.6, scikit-learn 1.9.1, LightGBM 4.7.0, XGBoost 3.4.1, CatBoost 1.2.10 and SHAP 0.54.1. The Python modules preserve these recorded version checks; a newer environment is not silently treated as identical. The metadata and aggregate values were read from saved artifacts; the public adaptation does not reload models.
+
+\clearpage
+\section*{5. Metrics and uncertainty}
+For positive/negative counts $n_+,n_-$ and scores $s_i$, empirical AUC is
+\[
+\frac1{n_+n_-}\sum_{i:y_i=1}\sum_{j:y_j=0}
+\left[\mathbf1\{s_i>s_j\}+\tfrac12\mathbf1\{s_i=s_j\}\right].
+\]
+It measures ranking and is invariant to strictly increasing score transformations. Calibration and fixed-threshold decisions need not be invariant. With confusion counts TP, FP, TN and FN,
+\[
+\mathrm{precision}=\frac{TP}{TP+FP},\quad \mathrm{recall}=\frac{TP}{TP+FN},
+\quad F_1=\frac{2TP}{2TP+FP+FN},
+\]
+\[
+\mathrm{accuracy}=\frac{TP+TN}{N},\qquad
+\mathrm{BA}=\frac12\left[\frac{TP}{TP+FN}+\frac{TN}{TN+FP}\right].
+\]
+Class-0 metrics swap the positive/negative roles; macro averages weight classes equally and weighted averages use support. Undefined divisions follow the saved zero-division convention. The archived identifier \path{majority} denotes a constant training-prevalence probability, not an always-majority-class decision rule. Its frozen threshold predicts all primary reserved rows positive.
+
+The primary aggregation is the equal-quarter mean; SD uses denominator $K-1$. Pooled AUC also compares ranks across quarters and can differ from the mean, especially when model score scales change across development refits. Calibration bins are the saved five quantile bins, not a recalibration exercise. Reference independent-observation AUC standard errors are not used to claim paired time-series significance. No profitability, Sharpe ratio or drawdown is inferred.
+
+\clearpage
+\section*{6. Complete candidate dictionary and final membership}
+The following 39 definitions reproduce the saved manifest. The final 34 exclude \path{ret_1d}, \path{ret_20d}, \path{vol_5_over_20}, \path{dist_ma20} and \path{us_slope_chg_5d}, all through the light MI screen. Native-calendar index $d$, report index $j$ and aligned decision index $t$ are distinguished. $\ell_k$ is a native log return, $s_n$ a sample SD and $z_n$ a trailing standardized value. Four sector features depend on licensed J-Quants observations; none of those observations are reproduced here. The ten own-price baseline features remain the entire currency-state family, including features removed from the expanded model.
+\input{generated/dictionary.tex}
+
+\clearpage
+\section*{7. Detailed saved results}
+\input{generated/quarterly.tex}
+\clearpage
+\subsection*{Original reserved sample and full-coverage sensitivity}
+\input{generated/reserved_table.tex}
+\input{generated/coverage_table.tex}
+The primary 229-row comparison excludes 29 decisions because positioning observation age exceeds 35 days. The post-hoc 258-row sensitivity carries only reports actually published by the cutoff, preserves the original overlap and does not refit. R1 grows from 35/8 observations/positives to 64/19; later quarters are unchanged. Four event flags exist in the reserved year, but only one lies in the primary sample. These distinctions must remain attached to any reuse of the tables.
+
+\clearpage
+\section*{8. Full classification tables}
+The following saved pooled tables include both classes and macro/weighted averages. Development rows use each fold's frozen inner-chosen threshold; no threshold is fitted to pooled outer predictions. These are prediction summaries, not an execution backtest.
+\input{classification_tables}
+
+\clearpage
+\section*{9. Reproduction and implementation references}
+The source modules and selected command-line entry points are preserved from the audited refactor. The public exhibit builder reads aggregate CSV/JSON only. It does not acquire market data, reconstruct the feature matrix, load frozen models or rerun the 63 historical equivalence checks. Full reproduction needs the external research artifacts listed in the README and data-source inventory. A fresh download can differ from the historical snapshot; an unseeded historical solver can also differ on refit.
+
+AI-assisted source inspection, derivation review, execution and drafting formed part of the workflow described in the main report. The references below document specific estimators and implementation conventions. Provider sources and access routes are listed separately in \path{data_sources.md}. Proprietary lecture/exam materials, signed forms, private market observations and credentials are omitted.
+\begingroup\small
+\bibliographystyle{plain}
+\bibliography{references}
+\endgroup
+\end{document}
